@@ -1,0 +1,2 @@
+import { inviteMember } from "../lib/actions/trips";
+export function MemberInviteForm({ tripId }: { tripId: string }) { return <form action={inviteMember} className="card space-y-3"><h2 className="text-xl font-bold">Invite a member</h2><input type="hidden" name="trip_id" value={tripId}/><input className="input" name="email" type="email" placeholder="friend@example.com" required/><button className="btn w-full">Invite</button></form>; }

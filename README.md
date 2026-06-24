@@ -1,26 +1,55 @@
-# Wayfare Group Trip Planner
+# Wayfare
 
-Wayfare is a polished Next.js landing page for a group trip planning product concept. It presents the core coordination loop: create a trip, invite members, propose places with real location data, vote, schedule winners into a shared itinerary, and split expenses.
+Wayfare is a full-stack group trip planning app built for Vercel with Next.js App Router, TypeScript, Tailwind CSS, Supabase Auth/Postgres/RLS, and Google Maps Platform.
 
-## Tech stack
+## Features
 
-- Next.js + React frontend
-- Supabase architecture plan for managed Postgres, auth, RLS, and realtime subscriptions
-- Google Maps Platform plan for Places API and Maps JavaScript API
-- Vercel deployment target
+- Supabase Auth sign up, login, and logout
+- Dashboard of trips visible through Supabase Row-Level Security
+- Trip creation and member invites by email
+- Google Places autocomplete for proposals with `lat`, `lng`, and `google_place_id`
+- Proposal voting backed by Supabase
+- Day-by-day itinerary scheduling and a Google Map of scheduled stops
+- Shared expenses with even splits across trip members
+- Unit-tested settlement function that reduces balances to the fewest payments
 
-## Getting started
+## Database
+
+Apply the initial migration in `supabase/migrations/0001_init.sql`. It creates:
+
+- `trips`
+- `trip_members`
+- `proposals`
+- `votes`
+- `itinerary_items`
+- `expenses`
+- `expense_splits`
+- `profiles`
+
+The migration enables RLS on app tables so authenticated users can only read and write trip data for trips they belong to.
+
+## Environment
+
+Copy `.env.example` to `.env.local` and fill in:
+
+```bash
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=
+```
+
+## Development
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open `http://localhost:3000` to view the site.
+## Checks
 
-## Scripts
+```bash
+npm run build
+npm test
+```
 
-- `npm run dev` - start the local development server
-- `npm run build` - create a production build
-- `npm run start` - serve the production build
-- `npm run lint` - run Next.js linting
+`npm run build` performs TypeScript validation in this environment. On Vercel, install the dependencies from `package.json`; Vercel detects `framework: nextjs` from `vercel.json` and deploys the App Router project as a Next.js app.
