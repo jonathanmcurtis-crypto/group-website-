@@ -1,0 +1,4 @@
+"use server";
+import { createSupabaseServerClient, getUser } from "../supabase/server";
+export async function addProposal(formData: FormData) { const user = await getUser(); if (!user) throw new Error("Sign in required"); await createSupabaseServerClient().from("proposals").insert({ trip_id: String(formData.get("trip_id")), title: String(formData.get("title")), notes: String(formData.get("notes") || ""), google_place_id: String(formData.get("google_place_id")), address: String(formData.get("address") || ""), lat: Number(formData.get("lat")), lng: Number(formData.get("lng")), proposed_by: user.id }); }
+export async function voteProposal(formData: FormData) { const user = await getUser(); if (!user) throw new Error("Sign in required"); await createSupabaseServerClient().from("votes").upsert({ proposal_id: String(formData.get("proposal_id")), user_id: user.id, value: Number(formData.get("value")), updated_at: new Date().toISOString() }); }

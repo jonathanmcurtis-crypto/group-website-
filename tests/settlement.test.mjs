@@ -1,0 +1,3 @@
+import test from 'node:test'; import assert from 'node:assert/strict';
+import { calculateSettlements } from '../lib/settlement.mjs';
+test('reduces debts to minimal payments', () => { const payments = calculateSettlements([{ paidBy:'alex', amountCents:9000, splits:[{userId:'alex', amountCents:3000},{userId:'mina', amountCents:3000},{userId:'jay', amountCents:3000}] }, { paidBy:'mina', amountCents:3000, splits:[{userId:'alex', amountCents:1000},{userId:'mina', amountCents:1000},{userId:'jay', amountCents:1000}] }]); assert.deepEqual(payments, [{ from:'jay', to:'alex', amountCents:4000 }, { from:'mina', to:'alex', amountCents:1000 }]); });

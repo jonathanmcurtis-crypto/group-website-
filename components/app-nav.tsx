@@ -1,0 +1,2 @@
+import Link from "next/link";
+export function AppNav({ email }: { email?: string }) { return <header className="border-b bg-white"><nav className="mx-auto flex max-w-6xl items-center justify-between p-4"><Link href="/dashboard" className="text-2xl font-black text-wayfare">✦ Wayfare</Link><div className="flex items-center gap-4 text-sm"><span className="text-slate-600">{email}</span><form action="/logout" method="post"><button className="btn-secondary py-2">Log out</button></form></div></nav></header>; }

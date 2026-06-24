@@ -1,0 +1,2 @@
+import { addProposal } from "../lib/actions/proposals"; import { PlacesAutocompleteFields } from "./places-autocomplete";
+export function ProposalForm({ tripId }: { tripId: string }) { return <form action={addProposal} className="card space-y-3"><h2 className="text-xl font-bold">Propose a place</h2><input type="hidden" name="trip_id" value={tripId}/><PlacesAutocompleteFields/><textarea className="input" name="notes" placeholder="Why should the group go?"/><button className="btn w-full">Add proposal</button></form>; }

@@ -1,0 +1,2 @@
+import Link from "next/link"; import type { Trip } from "../lib/types";
+export function TripCard({ trip }: { trip: Trip }) { return <Link href={`/trips/${trip.id}`} className="card block transition hover:-translate-y-1 hover:shadow-md"><p className="text-sm font-semibold uppercase tracking-wide text-lagoon">{trip.destination}</p><h2 className="mt-2 text-2xl font-bold">{trip.name}</h2><p className="mt-3 text-slate-600">{trip.start_date} → {trip.end_date}</p></Link>; }
